@@ -1,0 +1,9 @@
+scrapy
+sqlalchemy
+fastapi
+uvicorn 
+pydantic
+psycopg2-binary
+pandas 
+cachetools
+python-dotenv

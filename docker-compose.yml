@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  fastapi-app:
+    build: .
+    ports:
+      - "8001:8000"
+    volumes:
+      - .:/app
+    environment:
+      - API_KEY=1234567890
