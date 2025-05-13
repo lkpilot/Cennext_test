@@ -42,6 +42,8 @@ pip install -r requirements.txt
 
 ### 4. Create .env File
 
+- In the root directory, create a .env file and add the following:
+
 ```bash
 API_KEY_NAME=your_api_key_header_name
 API_KEY=your_secure_api_key
@@ -58,7 +60,7 @@ scrapy crawl books_crawler
 ### 6. FastAPI app
 
 ```bash
-docker-compose up --build
+uvicorn app:app --reload --port 8001
 ```
 
 - Visit the API docs at: http://127.0.0.1:8001/docs
