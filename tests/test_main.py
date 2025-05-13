@@ -11,7 +11,7 @@ def test_get_books_all():
 
 def test_get_books_by_country():
     response = client.get("/books?country=Italy", headers=headers)
-    assert response.status_code in (200, 404)  # 404 if no books for 'Italy'
+    assert response.status_code in (200, 404)  
 
 def test_post_book():
     book = {
