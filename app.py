@@ -1,13 +1,14 @@
 import logging
-from fastapi import FastAPI, HTTPException, Depends, Security
-from fastapi.security.api_key import APIKeyHeader
-from pydantic import BaseModel
 import pandas as pd
 import os
+from fastapi import FastAPI, HTTPException, Depends, Security
+from fastapi.security.api_key import APIKeyHeader
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 from typing import List, Optional
 from cachetools import cached, TTLCache
-from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
+
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -63,7 +64,9 @@ def load_books():
     
 books_df = load_books()
 
-
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 
 
 @app.get("/books", response_model=List[Book])

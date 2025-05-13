@@ -1,8 +1,9 @@
 import scrapy
 import os 
-from books.items import BooksItem
 import requests
 import random
+from books.items import BooksItem
+
 
 class BooksSpider(scrapy.Spider):
     name = "books_crawler"
@@ -13,6 +14,8 @@ class BooksSpider(scrapy.Spider):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.countries = self.get_countries()
+
+
 
     def get_countries(self):
         try:
@@ -27,9 +30,13 @@ class BooksSpider(scrapy.Spider):
             self.logger.error(f"Country API error: {e}")
             return ["Unknown"]
 
+
+
     def start_requests(self):
         for url in self.start_urls:
             yield scrapy.Request(url=url, callback=self.parse_cate)
+
+
 
     def parse_cate(self, response):
         cates = response.css("#default > div > div > div > aside > div.side_categories > ul > li > ul > li > a")
@@ -39,6 +46,8 @@ class BooksSpider(scrapy.Spider):
 
             cate_name = cate.css("::text").get().strip()
             yield scrapy.Request(url=cate_url, callback=self.parse_book_list, meta={"cate_name": cate_name})
+
+
 
     def parse_book_list(self, response):
         full_path = os.path.join("debug_html", f"{response.url}".replace('https://books.toscrape.com/catalogue/category/', ''))
